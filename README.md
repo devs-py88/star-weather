@@ -48,10 +48,11 @@ Ensure you have the following installed:
 
 3. **Set up environment variables**:
 
-    Create a `.env.local` file in the root directory and add your OpenWeather API key:
+    Create a `.env.local` file in the root directory and add your API key:
 
     ```bash
     OPENWEATHER_API_KEY=your_openweather_api_key
+    IPINFO_API_KEY=your_ipinfo_api_key
     ```
 
 4. **Run the development server**:
@@ -77,6 +78,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Axios](https://axios-http.com/)
 - [Windy](https://www.windy.com/)
+- [IPinfo](https://ipinfo.io/)
 
 ### Support
 Give a ⭐️ if you found this project helpful!

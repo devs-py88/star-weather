@@ -1,20 +1,34 @@
-'use client';
+"use client";
+import { useEffect, useState } from "react";
 
-type Props = {
-    date: number;
-};
+interface Props {
+  timezoneOffset?: number;
+}
 
-const LocalDate = ({ date }: Props) => {
-    return (
-        <span>
-            {new Date(date).toLocaleString('en-IN', {
-                weekday: 'short',
-                hour: 'numeric',
-                hour12:true,
-                minute: '2-digit',
-            })}
-        </span>
-    );
-};
+export default function CityTime({ timezoneOffset = 0 }: Props) {
+  const [time, setTime] = useState<string>("");
 
-export default LocalDate;
+  useEffect(() => {
+    const updateTime = () => {
+      const nowUTC = new Date();
+      const localTime = new Date(nowUTC.getTime() + timezoneOffset * 1000);
+
+      if (isNaN(localTime.getTime())) return;
+
+      setTime(
+        localTime.toLocaleTimeString("en-GB", {
+          hour: "2-digit",
+          minute: "2-digit",
+          second: "2-digit",
+          hour12: false,
+        })
+      );
+    };
+
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, [timezoneOffset]);
+
+  return <span>{time}</span>;
+}
